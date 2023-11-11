@@ -2,6 +2,11 @@ import re
 
 import streamlit as st
 
+# TODO calculate when enter is pressed
+# TODO add keyboard support
+# TODO add history
+# TODO add unit tests
+
 # Check if 'calculation' is already in the session state
 if "calculation" not in st.session_state:
     st.session_state["calculation"] = ""
