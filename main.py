@@ -8,8 +8,8 @@ import streamlit as st
 # TODO add unit tests
 
 # Check if 'calculation' is already in the session state
-if "calculation" not in st.session_state:
-    st.session_state["calculation"] = ""
+# if "calculation" not in st.session_state:
+#     st.session_state["calculation"] = ""
 
 
 def evaluate_calculation(calculation):
@@ -35,10 +35,10 @@ def evaluate_calculation(calculation):
         st.write(f"Error: {str(e)}")
 
 
-def add_to_calculation(symbol):
-    global calculation
-    calculation += str(symbol)
-    text_result.text_input(calculation)
+# def add_to_calculation(symbol):
+#     global calculation
+#     calculation += str(symbol)
+#     text_result.text_input(calculation)
 
 
 def key_press(key):
@@ -50,11 +50,9 @@ def key_press(key):
         st.session_state["calculation"] += "**"
     elif key == "=":
         try:
-            result = evaluate_calculation(st.session_state["calculation"])
-            st.write(f"Result: {result}")
-            st.session_state[
-                "calculation"
-            ] = ""  # Reset the calculation after evaluating it
+            st.session_state["calculation"] = evaluate_calculation(
+                st.session_state["calculation"]
+            )
         except Exception as e:
             st.write(f"Error: {str(e)}")
     elif key == "c":
@@ -62,25 +60,28 @@ def key_press(key):
     else:
         pass  # Ignore other characters
 
-    text_result.text_input("Calculation", st.session_state["calculation"])
+    calc_display.text_input("Calculation", st.session_state["calculation"])
 
 
-def clear_field():
-    """
-    Clears the calculation string
+# def clear_field():
+#     """
+#     Clears the calculation string
 
-    Returns:
-        None
-    """
-    global calculation
-    calculation = ""
+#     Returns:
+#         None
+#     """
+#     global calculation
+#     calculation = ""
 
 
 # layout for calculator display
 st.title("Calculator")
-text_result = st.empty()
-text_result.text_input(st.session_state["calculation"])
+calc_display = st.empty()
 
+if "calculation" not in st.session_state:
+    st.session_state["calculation"] = ""
+
+calc_display.text_input(st.session_state["calculation"])
 
 # Create layout for calculator buttons
 col1, col2, col3, col4, col5 = st.columns(5)
