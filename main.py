@@ -32,6 +32,15 @@ def evaluate_calculation(calculation):
 
 
 def key_press(key):
+    """
+    Handles key press events for the calculator.
+
+    Args:
+        key (str): The key that was pressed.
+
+    Returns:
+        None
+    """
     if key.isdigit() or key in ["+", "-", "*", "/", "(", ")", "."]:
         st.session_state["calculation"] += key
     elif key == "x":
