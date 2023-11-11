@@ -7,10 +7,6 @@ import streamlit as st
 # TODO add history
 # TODO add unit tests
 
-# Check if 'calculation' is already in the session state
-# if "calculation" not in st.session_state:
-#     st.session_state["calculation"] = ""
-
 
 def evaluate_calculation(calculation):
     """
@@ -35,12 +31,6 @@ def evaluate_calculation(calculation):
         st.write(f"Error: {str(e)}")
 
 
-# def add_to_calculation(symbol):
-#     global calculation
-#     calculation += str(symbol)
-#     text_result.text_input(calculation)
-
-
 def key_press(key):
     if key.isdigit() or key in ["+", "-", "*", "/", "(", ")", "."]:
         st.session_state["calculation"] += key
@@ -61,17 +51,6 @@ def key_press(key):
         pass  # Ignore other characters
 
     calc_display.text_input("Calculation", st.session_state["calculation"])
-
-
-# def clear_field():
-#     """
-#     Clears the calculation string
-
-#     Returns:
-#         None
-#     """
-#     global calculation
-#     calculation = ""
 
 
 # layout for calculator display
