@@ -101,7 +101,7 @@ def key_press(key):
         case _:
             return  # Ignore other keys
 
-    calc_display.text_input("Calculation", st.session_state["calculation"])
+    update_display(st.session_state["calculation"])
 
 
 # layout for calculator display
