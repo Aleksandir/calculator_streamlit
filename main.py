@@ -22,17 +22,20 @@ def evaluate_calculation(calculation):
     Returns:
         str: The result of the calculation as a string, or "Error" if the calculation is invalid.
     """
-    try:
-        # Add * between number and (
-        calculation = re.sub(r"(\d)\(", r"\1*(", calculation)
-        # Add * between ) and number
-        calculation = re.sub(r"\)(\d)", r")*\1", calculation)
-        calculation = str(eval(calculation))
-        if calculation.endswith(".0"):
-            calculation = calculation[:-2]
-        return calculation
-    except Exception as e:
-        st.write(f"Error: {str(e)}")
+    if calculation == "":
+        return ""
+    else:
+        try:
+            # Add * between number and (
+            calculation = re.sub(r"(\d)\(", r"\1*(", calculation)
+            # Add * between ) and number
+            calculation = re.sub(r"\)(\d)", r")*\1", calculation)
+            calculation = str(eval(calculation))
+            if calculation.endswith(".0"):
+                calculation = calculation[:-2]
+            return calculation
+        except Exception as e:
+            st.write(f"Error: {str(e)}")
 
 
 def key_press(key):
@@ -51,10 +54,13 @@ def key_press(key):
         case "x":
             st.session_state["calculation"] += "*"
         case "**2":
-            st.session_state["calculation"] += "**2"
-            st.session_state["calculation"] = evaluate_calculation(
-                st.session_state["calculation"]
-            )
+            if st.session_state["calculation"] == "":
+                continue
+            else:
+                st.session_state["calculation"] += "**2"
+                st.session_state["calculation"] = evaluate_calculation(
+                    st.session_state["calculation"]
+                )
         case "=":
             try:
                 st.session_state["calculation"] = evaluate_calculation(
@@ -76,9 +82,14 @@ def key_press(key):
 st.title("Calculator")
 calc_display = st.empty()
 
-# st.session_state["calculation"] = calc_display.text_input(
-#     "Calculation", st.session_state["calculation"]
-# )
+if "calc_display_exists" not in st.session_state:
+    st.session_state["calc_display_exists"] = False
+
+if not st.session_state["calc_display_exists"]:
+    st.session_state["calculation"] = calc_display.text_input(
+        "Calculation", st.session_state["calculation"]
+    )
+    st.session_state["calc_display_exists"] = True
 
 # Create layout for calculator buttons
 col1, col2, col3, col4, col5 = st.columns(5)
