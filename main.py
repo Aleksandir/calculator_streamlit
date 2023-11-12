@@ -60,6 +60,15 @@ def evaluate_calculation(calculation):
             return "Error"
 
 
+def calculate(calculation):
+    try:
+        st.session_state["calculation"] = evaluate_calculation(
+            st.session_state["calculation"]
+        )
+    except Exception as e:
+        st.write(f"Error: {str(e)}")
+
+
 def key_press(key):
     """
     Handles key press events for the calculator.
@@ -80,26 +89,22 @@ def key_press(key):
         case "x":
             st.session_state["calculation"] += "*"
         case "**2":
+            # if calculation is empty, pressing x² does nothing
             if st.session_state["calculation"] == "":
-                calc_display.text_input("Calculation", st.session_state["calculation"])
+                update_display("Error")
                 return
+            # if calculation ends with a number, add **2 and calculate
             else:
                 st.session_state["calculation"] += "**2"
-                st.session_state["calculation"] = evaluate_calculation(
-                    st.session_state["calculation"]
-                )
+                calculate(st.session_state["calculation"])
         case "=":
-            try:
-                st.session_state["calculation"] = evaluate_calculation(
-                    st.session_state["calculation"]
-                )
-            except Exception as e:
-                st.write(f"Error: {str(e)}")
-                return
+            calculate(st.session_state["calculation"])
         case "c":
             st.session_state["calculation"] = ""  # Clear the calculation
+        case "%":
+            st.session_state["calculation"] += "/100"
         case _:
-            return  # Ignore other keys
+            pass
 
     update_display(st.session_state["calculation"])
 
