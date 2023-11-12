@@ -24,3 +24,4 @@ The layout for the calculator display and buttons is defined in the main part of
 
 - Support for more advanced mathematical operations
 - Improved error handling and user feedback
+- add keyboard input support (may require a different framework eg. flask)
