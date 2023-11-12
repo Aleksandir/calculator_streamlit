@@ -8,6 +8,10 @@ import streamlit as st
 # TODO add unit tests
 
 
+if "calculation" not in st.session_state:
+    st.session_state["calculation"] = ""
+
+
 def evaluate_calculation(calculation):
     """
     Evaluates a mathematical calculation string and returns the result.
@@ -46,8 +50,11 @@ def key_press(key):
             st.session_state["calculation"] += key
         case "x":
             st.session_state["calculation"] += "*"
-        case "^":
-            st.session_state["calculation"] += "**"
+        case "**2":
+            st.session_state["calculation"] += "**2"
+            st.session_state["calculation"] = evaluate_calculation(
+                st.session_state["calculation"]
+            )
         case "=":
             try:
                 st.session_state["calculation"] = evaluate_calculation(
@@ -69,12 +76,9 @@ def key_press(key):
 st.title("Calculator")
 calc_display = st.empty()
 
-if "calculation" not in st.session_state:
-    st.session_state["calculation"] = ""
-
-st.session_state["calculation"] = calc_display.text_input(
-    "Calculation", st.session_state["calculation"]
-)
+# st.session_state["calculation"] = calc_display.text_input(
+#     "Calculation", st.session_state["calculation"]
+# )
 
 # Create layout for calculator buttons
 col1, col2, col3, col4, col5 = st.columns(5)
@@ -123,7 +127,7 @@ with col3:
         key_press("9")
 with col4:
     if st.button("x²"):
-        key_press("**")
+        key_press("**2")
 with col5:
     if st.button("%"):
         key_press("%")
