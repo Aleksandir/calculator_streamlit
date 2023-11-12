@@ -57,7 +57,7 @@ def evaluate_calculation(calculation):
                 calculation = calculation[:-2]
             return calculation
         except Exception:
-            update_display("Error")
+            return "Error"
 
 
 def key_press(key):
