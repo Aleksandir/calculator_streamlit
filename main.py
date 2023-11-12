@@ -102,7 +102,7 @@ with col3:
     if st.button("6"):
         key_press("6")
 with col4:
-    if st.button("&#42;"):  # HTML entity for *
+    if st.button("x"):  # HTML entity for *
         key_press("*")
 with col5:
     if st.button("/"):
