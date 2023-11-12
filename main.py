@@ -41,23 +41,24 @@ def key_press(key):
     Returns:
         None
     """
-    if key.isdigit() or key in ["+", "-", "*", "/", "(", ")", "."]:
-        st.session_state["calculation"] += key
-    elif key == "x":
-        st.session_state["calculation"] += "*"
-    elif key == "^":
-        st.session_state["calculation"] += "**"
-    elif key == "=":
-        try:
-            st.session_state["calculation"] = evaluate_calculation(
-                st.session_state["calculation"]
-            )
-        except Exception as e:
-            st.write(f"Error: {str(e)}")
-    elif key == "c":
-        st.session_state["calculation"] = ""  # Clear the calculation
-    else:
-        pass  # Ignore other characters
+    match key:
+        case _ if key.isdigit() or key in ["+", "-", "*", "/", "(", ")", "."]:
+            st.session_state["calculation"] += key
+        case "x":
+            st.session_state["calculation"] += "*"
+        case "^":
+            st.session_state["calculation"] += "**"
+        case "=":
+            try:
+                st.session_state["calculation"] = evaluate_calculation(
+                    st.session_state["calculation"]
+                )
+            except Exception as e:
+                st.write(f"Error: {str(e)}")
+        case "c":
+            st.session_state["calculation"] = ""  # Clear the calculation
+        case _:
+            pass  # Ignore other characters
 
     calc_display.text_input("Calculation", st.session_state["calculation"])
 
