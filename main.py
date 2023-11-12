@@ -70,6 +70,10 @@ def key_press(key):
     Returns:
         None
     """
+    # if calculation is currently "error" and a key is pressed, clear the error
+    if st.session_state["calculation"] == "Error":
+        st.session_state["calculation"] = ""
+
     match key:
         case _ if key.isdigit() or key in ["+", "-", "*", "/", "(", ")", "."]:
             st.session_state["calculation"] += key
