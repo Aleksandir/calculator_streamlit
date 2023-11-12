@@ -8,10 +8,6 @@ import streamlit as st
 # TODO add unit tests
 
 
-if "calculation" not in st.session_state:
-    st.session_state["calculation"] = ""
-
-
 def update_display(display_text):
     """
     Updates the calculator display.
@@ -113,6 +109,9 @@ def key_press(key):
 
 st.title("Calculator")
 calc_display = st.empty()
+
+if "calculation" not in st.session_state:
+    st.session_state["calculation"] = ""
 
 if "calc_display_exists" not in st.session_state:
     st.session_state["calc_display_exists"] = False
