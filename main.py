@@ -94,7 +94,6 @@ def key_press(key):
                     st.session_state["calculation"]
                 )
             except Exception as e:
-                # BUG when = pressed after error, error is not cleared
                 st.write(f"Error: {str(e)}")
                 return
         case "c":
