@@ -54,11 +54,13 @@ def key_press(key):
                     st.session_state["calculation"]
                 )
             except Exception as e:
+                # BUG when = pressed after error, error is not cleared
                 st.write(f"Error: {str(e)}")
+                return
         case "c":
             st.session_state["calculation"] = ""  # Clear the calculation
         case _:
-            pass  # Ignore other characters
+            return  # Ignore other keys
 
     calc_display.text_input("Calculation", st.session_state["calculation"])
 
