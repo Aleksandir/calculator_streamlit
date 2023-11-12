@@ -12,6 +12,28 @@ if "calculation" not in st.session_state:
     st.session_state["calculation"] = ""
 
 
+def update_display(display_text):
+    """
+    Updates the calculator display.
+
+    Args:
+        display_text (str): The text to display.
+
+    Returns:
+        None
+    """
+    if "calc_display_exists" not in st.session_state:
+        st.session_state["calc_display_exists"] = False
+
+    if not st.session_state["calc_display_exists"]:
+        st.session_state["calculation"] = calc_display.text_input(
+            "Calculation", st.session_state["calculation"]
+        )
+        st.session_state["calc_display_exists"] = True
+
+    calc_display.text_input("Calculation", display_text)
+
+
 def evaluate_calculation(calculation):
     """
     Evaluates a mathematical calculation string and returns the result.
@@ -34,8 +56,8 @@ def evaluate_calculation(calculation):
             if calculation.endswith(".0"):
                 calculation = calculation[:-2]
             return calculation
-        except Exception as e:
-            st.write(f"Error: {str(e)}")
+        except Exception:
+            update_display("Error")
 
 
 def key_press(key):
@@ -55,7 +77,8 @@ def key_press(key):
             st.session_state["calculation"] += "*"
         case "**2":
             if st.session_state["calculation"] == "":
-                continue
+                calc_display.text_input("Calculation", st.session_state["calculation"])
+                return
             else:
                 st.session_state["calculation"] += "**2"
                 st.session_state["calculation"] = evaluate_calculation(
@@ -79,6 +102,7 @@ def key_press(key):
 
 
 # layout for calculator display
+
 st.title("Calculator")
 calc_display = st.empty()
 
