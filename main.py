@@ -7,6 +7,9 @@ import streamlit as st
 # TODO add history
 # TODO add unit tests
 
+# Create a placeholder for the text input
+calc_display = st.empty()
+
 
 def update_display(display_text):
     """
@@ -107,86 +110,92 @@ def key_press(key):
 
 # layout for calculator display
 
-st.title("Calculator")
-calc_display = st.empty()
 
-if "calculation" not in st.session_state:
-    st.session_state["calculation"] = ""
+def main():
+    st.title("Calculator")
+    calc_display = st.empty()
 
-if "calc_display_exists" not in st.session_state:
-    st.session_state["calc_display_exists"] = False
+    if "calculation" not in st.session_state:
+        st.session_state["calculation"] = ""
 
-if not st.session_state["calc_display_exists"]:
-    user_input = st.session_state["calculation"] = calc_display.text_input(
-        "Calculation", st.session_state["calculation"]
-    )
-    st.session_state["calc_display_exists"] = True
+    if "calc_display_exists" not in st.session_state:
+        st.session_state["calc_display_exists"] = False
 
-# Create layout for calculator buttons
-col1, col2, col3, col4, col5 = st.columns(5)
-with col1:
-    if st.button("1"):
-        key_press("1")
-with col2:
-    if st.button("2"):
-        key_press("2")
-with col3:
-    if st.button("3"):
-        key_press("3")
-with col4:
-    if st.button("&#43;"):  # HTML entity for +
-        key_press("+")
-with col5:
-    if st.button("&#45;"):  # HTML entity for -
-        key_press("-")
+    if not st.session_state["calc_display_exists"]:
+        user_input = st.session_state["calculation"] = calc_display.text_input(
+            "Calculation", st.session_state["calculation"]
+        )
+        st.session_state["calc_display_exists"] = True
 
-col1, col2, col3, col4, col5 = st.columns(5)
-with col1:
-    if st.button("4"):
-        key_press("4")
-with col2:
-    if st.button("5"):
-        key_press("5")
-with col3:
-    if st.button("6"):
-        key_press("6")
-with col4:
-    if st.button("x"):  # HTML entity for *
-        key_press("*")
-with col5:
-    if st.button("/"):
-        key_press("/")
+    # Create layout for calculator buttons
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        if st.button("1"):
+            key_press("1")
+    with col2:
+        if st.button("2"):
+            key_press("2")
+    with col3:
+        if st.button("3"):
+            key_press("3")
+    with col4:
+        if st.button("&#43;"):  # HTML entity for +
+            key_press("+")
+    with col5:
+        if st.button("&#45;"):  # HTML entity for -
+            key_press("-")
 
-col1, col2, col3, col4, col5 = st.columns(5)
-with col1:
-    if st.button("7"):
-        key_press("7")
-with col2:
-    if st.button("8"):
-        key_press("8")
-with col3:
-    if st.button("9"):
-        key_press("9")
-with col4:
-    if st.button("x²"):
-        key_press("**2")
-with col5:
-    if st.button("%"):
-        key_press("%")
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        if st.button("4"):
+            key_press("4")
+    with col2:
+        if st.button("5"):
+            key_press("5")
+    with col3:
+        if st.button("6"):
+            key_press("6")
+    with col4:
+        if st.button("x"):  # HTML entity for *
+            key_press("*")
+    with col5:
+        if st.button("/"):
+            key_press("/")
 
-col1, col2, col3, col4, col5 = st.columns(5)
-with col1:
-    if st.button("("):
-        key_press("(")
-with col2:
-    if st.button("0"):
-        key_press("0")
-with col3:
-    if st.button(")"):
-        key_press(")")
-with col4:
-    if st.button("AC"):
-        key_press("c")
-with col5:
-    if st.button("="):
-        key_press("=")
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        if st.button("7"):
+            key_press("7")
+    with col2:
+        if st.button("8"):
+            key_press("8")
+    with col3:
+        if st.button("9"):
+            key_press("9")
+    with col4:
+        if st.button("x²"):
+            key_press("**2")
+    with col5:
+        if st.button("%"):
+            key_press("%")
+
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        if st.button("("):
+            key_press("(")
+    with col2:
+        if st.button("0"):
+            key_press("0")
+    with col3:
+        if st.button(")"):
+            key_press(")")
+    with col4:
+        if st.button("AC"):
+            key_press("c")
+    with col5:
+        if st.button("="):
+            key_press("=")
+
+
+if __name__ == "__main__":
+    main()
