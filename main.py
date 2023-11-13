@@ -112,7 +112,6 @@ def key_press(key):
 
 
 def main():
-    st.title("Calculator")
     calc_display = st.empty()
 
     if "calculation" not in st.session_state:
