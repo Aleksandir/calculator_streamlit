@@ -20,5 +20,4 @@ def test_evaluate_calculation():
     assert evaluate_calculation("1 + (2 * 3))") == "Error"
 
 
-if __name__ == "__main__":
-    test_evaluate_calculation()
+test_evaluate_calculation()
