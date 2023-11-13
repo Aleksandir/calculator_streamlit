@@ -1,9 +1,5 @@
 # Description: Unit tests for main.py
 
-# import re
-
-import streamlit as st
-
 from main import evaluate_calculation
 
 
