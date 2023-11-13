@@ -7,9 +7,6 @@ import streamlit as st
 # TODO add history
 # TODO add unit tests
 
-# Create a placeholder for the text input
-calc_display = st.empty()
-
 
 def update_display(display_text):
     """
@@ -197,4 +194,7 @@ def main():
 
 
 if __name__ == "__main__":
+    # Create a placeholder for the text input
+    calc_display = st.empty()
+
     main()
